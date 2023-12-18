@@ -1,9 +1,9 @@
 /* script.js */
 
-let operation = {
-    operand1: 0,
-    operand2: 0,
-    operator: ""
+let equation = {
+    operand1: null,
+    operand2: null,
+    operator: null
 };
 
 const calcContainer = document.querySelector("#calc-container");
@@ -21,6 +21,8 @@ function createCalculator() {
 
     organizeCalculator();
     createNumpad();
+    createRightButtons();
+    updateView();
 }
 
 function organizeCalculator() {
@@ -37,9 +39,7 @@ function organizeCalculator() {
     lBottomBtnContainer.classList.add("left-bottom-btns");
     rBottomBtnContainer.classList.add("right-bottom-btns");
 
-    view.textContent = "hey";
     topBtnContainer.textContent = "hey";
-    rBottomBtnContainer.textContent = "hey";
 }
 
 function createNumpad() {
@@ -91,6 +91,11 @@ function createRightButtons() {
     const addButton = document.createElement("div");
     const equalsButton = document.createElement("div");
 
+    multiplyButton.textContent = "*";
+    subtractButton.textContent = "-";
+    addButton.textContent = "+";
+    equalsButton.textContent = "=";
+
     multiplyButton.addEventListener("click", () => {
 
         setOperator("*");
@@ -108,13 +113,29 @@ function createRightButtons() {
 
     equalsButton.addEventListener("click", () => {
 
-        setOperator("=");
+        solve();
     });
+
+    rBottomBtnContainer.appendChild(multiplyButton);
+    rBottomBtnContainer.appendChild(subtractButton);
+    rBottomBtnContainer.appendChild(addButton);
+    rBottomBtnContainer.appendChild(equalsButton);
 }
 
 function addNumber(num) {
 
-    operation.operand1 = num;
+    // With no operator present, add to operand1
+    // Otherwise, add to operand2
+    if(equation.operator == null) {
+
+        equation.operand1 = num;
+    }
+    else {
+
+        equation.operand2 = num;
+    }
+
+    updateView();
 }
 
 function addDecimalPlace() {
@@ -123,4 +144,91 @@ function addDecimalPlace() {
 
 function setOperator(op) {
 
+    equation.operator = op;
+
+    updateView();
+}
+
+function solve() {
+
+    // Unable to solve without both operands
+    if(operand1 == null
+        || operand2 == null) {
+
+        return;
+    }
+
+    let answer = equation.operand1;
+
+    switch(equation.operation) {
+
+        case "+":
+            answer += equation.operand2;
+            break;
+        case "-":
+            answer -= equation.operand2;
+            break;
+        case "/":
+            answer /= equation.operand2;
+            break; 
+        case "*":
+            answer *= equation.operand2;
+            break;
+        case "%":
+            answer %= equation.operand2;
+            break;
+    }
+
+    resetEquation();
+    equation.operand1 = answer;
+
+    updateView();
+}
+
+function resetEquation() {
+
+    equation.operand1 = null;
+    equation.operand2 = null;
+    equation.operator = null;
+}
+
+function updateView() {
+
+    /*
+    if(equation.operand2 != null) {
+
+        view.textContent = equation.operand2;
+    }
+    else if(equation.operand1 != null) {
+
+        view.textContent = equation.operand1;
+    }
+    else {
+
+        view.textContent = "-";
+    }
+    */
+
+    let str = "";
+
+    if(equation.operand1 != null) {
+
+        str += equation.operand1 + " ";
+    }
+
+    if(equation.operator != null) {
+
+        str += equation.operator + " ";
+    }
+    
+    if(equation.operand2 != null) {
+
+        str += equation.operand2;
+    }
+
+    if(str.length < 1) {
+        str = "-";
+    }
+
+    view.textContent = str;
 }
