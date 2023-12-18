@@ -1,0 +1,20 @@
+/* style.css */
+
+body {
+    font-family:'Courier New', Courier, monospace;
+    min-height: 100vh;
+    margin: 0;
+    display: flex; /* Align sections vertically */
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
+#header, #footer {
+    color: white;
+    text-align: center;
+    padding: 12px 10%;
+    background-color: black;
+}
