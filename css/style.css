@@ -10,13 +10,18 @@ body {
     align-items: stretch;
     -webkit-user-drag: none;
     user-select: none;
+
+    background-position: center; /* Create fixed background */
+    background-size: cover;
+    background-image: url(../images/cristian-palmer-ocean.jpg);
+    background-attachment: fixed;
 }
 
 #header, #footer {
     color: white;
     text-align: center;
     padding: 12px 10%;
-    background-color: black;
+    background-color: rgba(0, 92, 212, 0.5);
     /* Default flex-grow of 0 shrinks header/footer
     against the calculator in #content*/
 }
@@ -26,7 +31,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5%;
 }
 
 #calculator {
