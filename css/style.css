@@ -17,4 +17,18 @@ body {
     text-align: center;
     padding: 12px 10%;
     background-color: black;
+    /* Default flex-grow of 0 shrinks header/footer
+    against the calculator in #content*/
+}
+
+#content {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+}
+
+#calculator {
+
 }
