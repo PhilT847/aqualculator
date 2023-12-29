@@ -3,6 +3,7 @@
 body {
     font-family:'Courier New', Courier, monospace;
     min-height: 100vh;
+    min-width: 500px;
     margin: 0;
     display: flex; /* Align sections vertically */
     flex-direction: column;
@@ -36,7 +37,9 @@ body {
 #calc-container {
     display: flex;
     flex-direction: column;
-    flex-basis: 30%;
+    gap: 12px;
+    height: 550px;
+    width: 400px;
     background-color: blue;
     padding: 20px;
     box-shadow: 18px 18px 12px black;
@@ -46,9 +49,14 @@ body {
 #top-btn-container, #bottom-btn-container,
 #numpad-container, .right-bottom-btns {
     display: flex;
+    justify-content: space-between;
+    gap: 10px;
 }
 
 #view {
+    height: 72px;
+    font-size: 36px;
+    margin: 0px 0px 24px 0px;
     background-color: beige;
     text-align: right;
     box-shadow: inset 4px 4px 4px 2px rgba(0,0,0,0.2);
@@ -56,33 +64,43 @@ body {
 }
 
 #top-btn-container {
-    background-color: green;
 }
 
 #bottom-btn-container {
-    background-color: yellow;
     justify-content: space-between;
 }
 
 #numpad-container {
-    background-color: purple;
+    flex-wrap: wrap;
+    flex-basis: 300px;
+}
+
+.button {
+    font-size: 32px;
+    font-weight: 700;
+    border-radius: 12px;
 }
 
 .left-bottom-btns {
-
+    flex-grow: 3;
+    margin: 0px 16px 0px 0px;
 }
 
 .right-bottom-btns {
     flex-direction: column;
+    flex-basis: 100px;
+    flex-grow: 1;
 }
 
 .button {
-    margin: 4px;
     background-color: aqua;
-
-    size: 24px 24px;
+    text-align: center;
+    vertical-align: middle;
+    width: 80px;
+    height: 80px;
 }
 
 .zero-button {
-    background-color: orange; 
+    background-color: orange;
+    width: 188px; 
 }
