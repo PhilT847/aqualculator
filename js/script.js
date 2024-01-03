@@ -16,16 +16,18 @@ const lBottomBtnContainer = document.createElement("div");
 const rBottomBtnContainer = document.createElement("div");
 const numpad = document.createElement("div");
 
-const seaLifeImages = ["../images/todd-cravens-whale.jpg",
-                        "../images/tim-de-pauw-hippo.jpg",
-                        "../images/john-doe-pirate.jpg",
-                        "../images/kind-and-curious-bubbles.jpg",
-                        "../images/louan-garcia-dolphin.jpg",
-                        "../images/michael-bernander-scuba-lionfish.jpg",
-                        "../images/rostyslav-savchyn-ducky.jpg",
-                        "../images/sebastian-pena-lambarri-clownfish.jpg",
-                        "../images/tengyart-beluga.jpg",
-                        "../images/alvin-matthews-crabs.jpg"];
+let seaLifeCycle;
+
+const seaLifeImages = ["./images/todd-cravens-whale.jpg",
+                        "./images/tim-de-pauw-hippo.jpg",
+                        "./images/john-doe-pirate.jpg",
+                        "./images/kind-and-curious-bubbles.jpg",
+                        "./images/louan-garcia-dolphin.jpg",
+                        "./images/michael-bernander-scuba-lionfish.jpg",
+                        "./images/rostyslav-savchyn-ducky.jpg",
+                        "./images/sebastian-pena-lambarri-clownfish.jpg",
+                        "./images/tengyart-beluga.jpg",
+                        "./images/alvin-matthews-crabs.jpg"];
                         
 
 createCalculator();
@@ -294,6 +296,14 @@ function setOperator(op) {
 
 function solve() {
 
+    // Divide by 0; kill fish
+    if(equation.operand2 == "0" &&
+        equation.operator == "/") {
+
+        killFish();
+        return;
+    }
+
     // Unable to solve without both operands
     if(equation.operand1 == null || 
         equation.operand2 == null ||
@@ -352,6 +362,13 @@ function solve() {
     /* Create sea life based on last digit */
 
     createSeaLife(Number.parseInt(answer.substring(0,1)));
+}
+
+function killFish() {
+
+    resetEquation();
+
+    view.textContent = ":(";
 }
 
 function backspace() {
@@ -424,14 +441,24 @@ function updateView() {
 
 function createSeaLife(num) {
 
-    aquaImage.style.opacity = 1;
-    aquaImage.src = seaLifeImages(num);
-    alert(aquaImage.src);
+    aquaImage.src = seaLifeImages[num];
 
-    setInterval(function() {
+    aquaImage.style.opacity = 1;
+
+    clearInterval(seaLifeCycle);
+    
+    seaLifeCycle = setInterval(function() {
+
+        if(aquaImage.style.opacity == 0) {
+
+            aquaImage.style.opacity = 1;
+        }
 
         if(aquaImage.style.opacity > 0.01) {
+
             aquaImage.style.opacity -= 0.01;
         }
-    }, 10);
+    }, 20);
+
+    aquaImage.style.opacity = 0;
 }

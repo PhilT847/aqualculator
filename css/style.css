@@ -77,8 +77,16 @@ body {
 
 .fading-image {
     position: absolute;
+    height: 100%;
     z-index: 1;
     opacity: 0;
+
+    /*
+    background-position: center;
+    background-size: cover;
+    background-image: url(../images/cristian-palmer-ocean.jpg);
+    background-attachment: fixed;
+    */
 }
 
 .button {
