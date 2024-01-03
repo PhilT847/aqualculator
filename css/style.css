@@ -54,8 +54,10 @@ body {
 }
 
 #view {
+    line-height: 72px; /* Align in center */
     height: 72px;
     font-size: 36px;
+    font-weight: 800;
     margin: 0px 0px 24px 0px;
     background-color: beige;
     text-align: right;
@@ -77,6 +79,7 @@ body {
 
 .fading-image {
     position: absolute;
+    size: cover;
     height: 100%;
     z-index: 1;
     opacity: 0;

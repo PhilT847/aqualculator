@@ -28,6 +28,8 @@ const seaLifeImages = ["./images/todd-cravens-whale.jpg",
                         "./images/sebastian-pena-lambarri-clownfish.jpg",
                         "./images/tengyart-beluga.jpg",
                         "./images/alvin-matthews-crabs.jpg"];
+
+const seaLifeSounds = []
                         
 
 createCalculator();
@@ -60,7 +62,8 @@ function createCalculator() {
 
             setOperator(event.key);
         }
-        else if(event.key === "Enter") {
+        else if(event.key === "Enter"
+                || event.key === "=") {
 
             solve();
         }
@@ -212,19 +215,6 @@ function createRightButtons() {
 
 function addNumber(num) {
 
-    // No more than 16 characters on the board
-    // Prevent more than 10 chars for operand1
-    if(equation.operand2 == null
-        && equation.operator == null
-        && view.textContent.length > 10) {
-
-        return;
-    }
-    else if(view.textContent.length > 16) {
-
-        return;
-    } 
-
     // With no operator present, add to operand1
     // Otherwise, add to operand2
     if(equation.operator == null) {
@@ -255,19 +245,27 @@ function addNumber(num) {
 
 function addDecimalPlace() {
 
-    if(equation.operand2 == null) {
+    if(equation.operator == null) {
 
-        if(!equation.operand1.includes(".")) {
+        if(equation.operand1 == null) {
+
+            equation.operand1 = "0.";
+        }
+        else if(!equation.operand1.includes(".")) {
 
             equation.operand1 += ".";
         }
     }
     else {
 
-        if(!equation.operand2.includes(".")) {
-            
+        if(equation.operand2 == null) {
+
+            equation.operand2 = "0.";
+        }
+        else if(!equation.operand2.includes(".")) {
+
             equation.operand2 += ".";
-        } 
+        }
     }
 
     updateView();
@@ -435,22 +433,31 @@ function updateView() {
 
         str = "-";
     }
+    else if(str.length > 18) { // If too long, just display the ends
+
+        str = str.substring(str.length - 18, str.length);
+    }
 
     view.textContent = str;
 }
 
 function createSeaLife(num) {
 
+    // Set new image source, and set opacity
     aquaImage.src = seaLifeImages[num];
 
-    aquaImage.style.opacity = 1;
+    // Play sound
+    let audio = new Audio(seaLifeSounds[num]);
+    audio.play();
 
+    // Clear image-fading interval and reset
     clearInterval(seaLifeCycle);
     
     seaLifeCycle = setInterval(function() {
 
         if(aquaImage.style.opacity == 0) {
 
+            aquaImage.src = seaLifeImages[num];
             aquaImage.style.opacity = 1;
         }
 
