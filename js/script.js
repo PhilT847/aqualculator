@@ -29,7 +29,17 @@ const seaLifeImages = ["./images/todd-cravens-whale.jpg",
                         "./images/tengyart-beluga.jpg",
                         "./images/alvin-matthews-crabs.jpg"];
 
-const seaLifeSounds = [];
+const seaLifeSounds = ["./sounds/whale.mp3",
+                        "./sounds/hippo.mp3",
+                        "./sounds/pirate.mp3",
+                        "./sounds/bubbles.mp3",
+                        "./sounds/dolphin.mp3",
+                        "./sounds/duck.mp3",
+                        "./sounds/duck.mp3",
+                        "./sounds/clown.mp3",
+                        "./sounds/duck.mp3",
+                        "./sounds/duck.mp3"];
+
 const impactSound = "./sounds/impact-boom.mp3";
                         
 
