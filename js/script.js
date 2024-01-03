@@ -29,7 +29,8 @@ const seaLifeImages = ["./images/todd-cravens-whale.jpg",
                         "./images/tengyart-beluga.jpg",
                         "./images/alvin-matthews-crabs.jpg"];
 
-const seaLifeSounds = []
+const seaLifeSounds = [];
+const impactSound = "./sounds/impact-boom.mp3";
                         
 
 createCalculator();
@@ -449,6 +450,9 @@ function createSeaLife(num) {
     // Play sound
     let audio = new Audio(seaLifeSounds[num]);
     audio.play();
+
+    let impactAudio = new Audio(impactSound);
+    impactAudio.play();
 
     // Clear image-fading interval and reset
     clearInterval(seaLifeCycle);
