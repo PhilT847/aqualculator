@@ -360,8 +360,8 @@ function solve() {
     updateView();
 
     /* Create sea life based on last digit */
-
-    createSeaLife(Number.parseInt(answer.substring(0,1)));
+    let lastChar = answer.substring(answer.length - 1);
+    createSeaLife(Number.parseInt(lastChar));
 }
 
 function killFish() {
@@ -454,9 +454,9 @@ function createSeaLife(num) {
             aquaImage.style.opacity = 1;
         }
 
-        if(aquaImage.style.opacity > 0.01) {
+        if(aquaImage.style.opacity > 0.02) {
 
-            aquaImage.style.opacity -= 0.01;
+            aquaImage.style.opacity -= 0.02;
         }
     }, 20);
 
