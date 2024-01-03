@@ -24,6 +24,37 @@ function createCalculator() {
     createTopButtons();
     createRightButtons();
     updateView();
+
+    // Keyboard support
+    document.addEventListener("keydown", (event) => {
+
+        // Integer; add to calc
+        if(isFinite(event.key)) {
+
+            addNumber(event.key);
+        }
+        else if(event.key === ".") {
+
+            addDecimalPlace();
+        }
+        else if(event.key === "+"
+            || event.key === "-"
+            || event.key === "*"
+            || event.key === "/"
+            || event.key === "%") {
+
+            setOperator(event.key);
+        }
+        else if(event.key === "Enter") {
+
+            solve();
+        }
+        else if(event.key === "Backspace"
+            || event.key === "Delete") {
+
+            backspace();
+        }
+    });
 }
 
 function organizeCalculator() {
@@ -292,8 +323,17 @@ function solve() {
     }
 
     resetEquation();
-    equation.operand1 = answer.toString();
 
+    /* round to six decimals, if longer */
+    answer = answer.toString();
+
+    if(answer.includes(".")
+        && answer.substring(answer.indexOf(".")).length > 7) {
+            answer = answer.substring(0, answer.indexOf(".") + 7);
+    }
+    
+    equation.operand1 = answer;
+    
     updateView();
 }
 
@@ -364,34 +404,3 @@ function updateView() {
 
     view.textContent = str;
 }
-
-// Keyboard support
-document.addEventListener("keydown", (event) => {
-
-    // Integer; add to calc
-    if(isFinite(event.key)) {
-
-        addNumber(event.key);
-    }
-    else if(event.key === ".") {
-
-        addDecimalPlace();
-    }
-    else if(event.key === "+"
-        || event.key === "-"
-        || event.key === "*"
-        || event.key === "/"
-        || event.key === "%") {
-
-        setOperator(event.key);
-    }
-    else if(event.key === "Enter") {
-
-        solve();
-    }
-    else if(event.key === "Backspace"
-        || event.key === "Delete") {
-
-        backspace();
-    }
-});

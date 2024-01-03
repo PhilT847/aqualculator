@@ -41,7 +41,7 @@ body {
     height: 550px;
     width: 400px;
     background-color: blue;
-    padding: 20px;
+    padding: 32px;
     box-shadow: 18px 18px 12px black;
     border-radius: 12px;
 }
@@ -76,6 +76,8 @@ body {
 }
 
 .button {
+    line-height: 80px; /* Align in center */
+    vertical-align: middle;
     font-size: 32px;
     font-weight: 700;
     border-radius: 12px;
