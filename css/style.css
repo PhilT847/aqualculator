@@ -77,11 +77,12 @@ body {
 
 .fading-image {
     position: absolute;
-    z-index: -1;
+    z-index: 1;
+    opacity: 0;
 }
 
 .button {
-    line-height: 80px; /* Align in center */
+    line-height: 84px; /* Align in center */
     vertical-align: middle;
     font-size: 32px;
     font-weight: 700;

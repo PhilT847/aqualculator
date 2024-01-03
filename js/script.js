@@ -7,6 +7,7 @@ let equation = {
 };
 
 const calcContainer = document.querySelector("#calc-container");
+const aquaImage = document.querySelector(".fading-image");
 const calculator = document.createElement("div");
 const view = document.createElement("div");
 const topBtnContainer = document.createElement("div");
@@ -14,6 +15,18 @@ const bottomBtnContainer = document.createElement("div");
 const lBottomBtnContainer = document.createElement("div");
 const rBottomBtnContainer = document.createElement("div");
 const numpad = document.createElement("div");
+
+const seaLifeImages = ["../images/todd-cravens-whale.jpg",
+                        "../images/tim-de-pauw-hippo.jpg",
+                        "../images/john-doe-pirate.jpg",
+                        "../images/kind-and-curious-bubbles.jpg",
+                        "../images/louan-garcia-dolphin.jpg",
+                        "../images/michael-bernander-scuba-lionfish.jpg",
+                        "../images/rostyslav-savchyn-ducky.jpg",
+                        "../images/sebastian-pena-lambarri-clownfish.jpg",
+                        "../images/tengyart-beluga.jpg",
+                        "../images/alvin-matthews-crabs.jpg"];
+                        
 
 createCalculator();
 
@@ -335,6 +348,10 @@ function solve() {
     equation.operand1 = answer;
     
     updateView();
+
+    /* Create sea life based on last digit */
+
+    createSeaLife(Number.parseInt(answer.substring(0,1)));
 }
 
 function backspace() {
@@ -403,4 +420,18 @@ function updateView() {
     }
 
     view.textContent = str;
+}
+
+function createSeaLife(num) {
+
+    aquaImage.style.opacity = 1;
+    aquaImage.src = seaLifeImages(num);
+    alert(aquaImage.src);
+
+    setInterval(function() {
+
+        if(aquaImage.style.opacity > 0.01) {
+            aquaImage.style.opacity -= 0.01;
+        }
+    }, 10);
 }
