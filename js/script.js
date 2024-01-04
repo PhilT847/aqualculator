@@ -21,7 +21,7 @@ const rBound = window.innerWidth + 200;
 const lBound = -200;
 
 let swimCycle;
-let seaLifeCycle;
+let fadeCycle;
 
 const seaLifeImages = ["./images/todd-cravens-whale.jpg",
                         "./images/tim-de-pauw-hippo.jpg",
@@ -539,7 +539,7 @@ function createSeaLife(num) {
 
     // Set new image source, and set opacity
     aquaImage.src = seaLifeImages[num];
-    aquaImage.style.opacity == 0;
+    aquaImage.style.opacity = -1;
     
     // Play sound
     let audio = new Audio(seaLifeSounds[num]);
@@ -549,30 +549,33 @@ function createSeaLife(num) {
     impactAudio.play();
 
     // Clear image-fading interval and reset
-    clearInterval(seaLifeCycle);
+    if(fadeCycle != null) {
+        
+        clearInterval(fadeCycle);
+    }
     
-    seaLifeCycle = setInterval(function() {
-
-        if(aquaImage.style.opacity == 0) {
-
-            aquaImage.src = seaLifeImages[num];
-            aquaImage.style.opacity = 1;
-        }
-
-        if(aquaImage.style.opacity > 0.01) {
-
-            aquaImage.style.opacity -= 0.01;
-        }
-        else { // End cycle once cleared
-
-            clearInterval(seaLifeCycle);
-        }
-    }, 10);
-
-    aquaImage.style.opacity = 0;
+    fadeCycle = setInterval(fadeImage, 10);
 
     // Spawn swimming sea life
-    spawnSeaLife(seaLifeImages[num], num)
+    spawnSeaLife(seaLifeImages[num], num);
+}
+
+function fadeImage() {
+    
+    if(aquaImage.style.opacity < 0) {
+
+        aquaImage.style.opacity = 1;
+    }
+    
+    if(aquaImage.style.opacity > 0.01) {
+
+        aquaImage.style.opacity -= 0.01;
+    }
+    else { // End cycle once cleared
+
+        aquaImage.style.opacity = -1;
+        clearInterval(fadeCycle);
+    }
 }
 
 function spawnSeaLife(img, num) {
