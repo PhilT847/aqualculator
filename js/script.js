@@ -58,7 +58,7 @@ class SeaLife {
         this.image.style.left = (this.facingRight ? "0px" : "200px");
         this.image.style.top = startY + "px";
 
-        this.speed = 0.25 + (Math.random() * 0.5);
+        this.speed = 10.25 + (Math.random() * 0.5);
 
         // Push to list, and add to content
         allSeaLife.push(this);
@@ -69,7 +69,7 @@ class SeaLife {
         
         let pos = this.image.getBoundingClientRect();
 
-        if(pos.left > 500) {
+        if(pos.left > (window.innerWidth - this.image.width - 5)) {
 
             this.image.style.left = "0px";
             pos = this.image.getBoundingClientRect();
