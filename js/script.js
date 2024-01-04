@@ -65,7 +65,15 @@ class SeaLife {
 
     swim() {
         
-        //this.image.style.width = (Math.random() * 100) + "px";
+        let pos = this.image.getBoundingClientRect();
+
+        if(pos.left > 500) {
+
+            this.image.style.left = "0px";
+            pos = this.image.getBoundingClientRect();
+        }
+
+        this.image.style.left = pos.left + 1 + "px";
     }
 }
 
