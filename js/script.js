@@ -33,8 +33,19 @@ const seaLifeImages = ["./images/todd-cravens-whale.jpg",
                         "./images/michael-bernander-scuba-lionfish.jpg",
                         "./images/rostyslav-savchyn-ducky.jpg",
                         "./images/sebastian-pena-lambarri-clownfish.jpg",
-                        "./images/tengyart-beluga.jpg",
+                        "./images/maren-pauly-crocodile.jpg",
                         "./images/alvin-matthews-crabs.jpg"];
+
+const creatureImages = ["./images/sea-life/whale.png",
+                        "./images/sea-life/hippo.png",
+                        "./images/sea-life/pirate.png",
+                        "./images/sea-life/treasure.png",
+                        "./images/sea-life/dolphin.png",
+                        "./images/sea-life/scuba.png",
+                        "./images/sea-life/duckie.png",
+                        "./images/sea-life/clownfish.png",
+                        "./images/sea-life/crocodile.png",
+                        "./images/sea-life/crab.png"];
 
 const seaLifeSounds = ["./sounds/whale.mp3",
                         "./sounds/hippo.mp3",
@@ -62,11 +73,16 @@ class SeaLife {
         this.yPos = y;
         this.image.style.top = this.yPos;
 
-        this.speed = 5.25 + (Math.random() * 0.5);
+        this.speed = 0.34 + (Math.random() * 0.66);
 
         this.facingRight = (Math.floor(Math.random() * 2) == 0);
 
         this.image.style.left = "0px";
+
+        let size = 50 + Math.floor(Math.random() * 200);
+
+        this.image.style.width = size + "px";
+        this.image.style.height = size + "px";
 
         if(!this.facingRight) {
 
@@ -568,7 +584,7 @@ function createSeaLife(num) {
     fadeCycle = setInterval(fadeImage, 10);
 
     // Spawn swimming sea life
-    spawnSeaLife(seaLifeImages[num], num);
+    spawnSeaLife(creatureImages[num], num);
 }
 
 function fadeImage() {
