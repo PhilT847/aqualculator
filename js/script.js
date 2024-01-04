@@ -584,7 +584,7 @@ function spawnSeaLife(img, num) {
     }
 
     let y = Math.floor(10 + (Math.random() * 80));
-    y = y.toString() + "%";
+    y = y.toString() + "vh";
 
     let newLife = new SeaLife(img, y);
 }
