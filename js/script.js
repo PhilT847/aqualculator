@@ -456,7 +456,8 @@ function createSeaLife(num) {
 
     // Set new image source, and set opacity
     aquaImage.src = seaLifeImages[num];
-
+    aquaImage.style.opacity == 0;
+    
     // Play sound
     let audio = new Audio(seaLifeSounds[num]);
     audio.play();
@@ -475,11 +476,11 @@ function createSeaLife(num) {
             aquaImage.style.opacity = 1;
         }
 
-        if(aquaImage.style.opacity > 0.02) {
+        if(aquaImage.style.opacity > 0.01) {
 
-            aquaImage.style.opacity -= 0.02;
+            aquaImage.style.opacity -= 0.01;
         }
-    }, 20);
+    }, 10);
 
     aquaImage.style.opacity = 0;
 }
