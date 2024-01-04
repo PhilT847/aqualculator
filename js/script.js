@@ -20,6 +20,8 @@ const numpad = document.createElement("div");
 const rBound = window.innerWidth + 200;
 const lBound = -200;
 
+const maxPop = 20;
+
 let swimCycle;
 let fadeCycle;
 
@@ -589,7 +591,11 @@ function spawnSeaLife(img, num) {
     let y = Math.floor(10 + (Math.random() * 80));
     y = y.toString() + "vh";
 
-    let newLife = new SeaLife(img, y);
+    // Spawn new sea life up to maximum pop
+    if(allSeaLife.length < maxPop) {
+
+        let newLife = new SeaLife(img, y);
+    }
 }
 
 function moveSeaLife() {
