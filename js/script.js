@@ -118,6 +118,7 @@ function createCalculator() {
     createTopButtons();
     createRightButtons();
     updateView();
+    loadImages(); // Preload images
 
     // Keyboard support
     document.addEventListener("keydown", (event) => {
@@ -150,6 +151,14 @@ function createCalculator() {
             backspace();
         }
     });
+}
+
+function loadImages() {
+
+    for(let i = 0; i < seaLifeImages.length; i++) {
+
+        aquaImage.style.src = seaLifeImages[i];
+    }
 }
 
 function organizeCalculator() {
