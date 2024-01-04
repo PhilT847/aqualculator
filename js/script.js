@@ -56,7 +56,7 @@ class SeaLife {
 
         this.image.style.top = startY + "px";
 
-        this.speed = 10.25 + (Math.random() * 0.5);
+        this.speed = 0.25 + (Math.random() * 0.5);
 
         this.facingRight = (Math.floor(Math.random() * 2) == 0);
 
@@ -147,9 +147,6 @@ function createCalculator() {
             backspace();
         }
     });
-
-    // Begin cycle to move sea life
-    swimCycle = setInterval(moveSeaLife, 10);
 }
 
 function organizeCalculator() {
@@ -444,6 +441,25 @@ function killFish() {
     resetEquation();
 
     view.textContent = ":(";
+
+    // Kill fish and end swimCycle if running
+    if(swimCycle != null) {
+
+        // Clear swimCycle before deleting
+        clearInterval(swimCycle);
+
+        for(let i = 0; i < allSeaLife.length; i++) {
+
+            allSeaLife[i].image.remove();
+            
+            delete allSeaLife[i];
+        }
+
+        // Make new array
+        allSeaLife = [];
+
+        swimCycle = null;
+    }
 }
 
 function backspace() {
@@ -559,6 +575,12 @@ function createSeaLife(num) {
 }
 
 function spawnSeaLife(img, num) {
+
+    // Begin swim interval, if no life exists yet
+    if(swimCycle == null) {
+        
+        swimCycle = setInterval(moveSeaLife, 10);
+    }
 
     let newLife = new SeaLife(img, num * 100);
 }
