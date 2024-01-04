@@ -54,11 +54,21 @@ class SeaLife {
         this.image.classList.add("moving-object");
         this.image.src = image;
 
-        this.facingRight = (Math.floor(Math.random() * 2) == 0);
-        this.image.style.left = (this.facingRight ? "0px" : "200px");
         this.image.style.top = startY + "px";
 
         this.speed = 10.25 + (Math.random() * 0.5);
+
+        this.facingRight = (Math.floor(Math.random() * 2) == 0);
+
+        this.image.style.left = "0px";
+
+        if(this.facingRight) {
+
+        }
+        else {
+
+            this.speed *= -1;
+        }
 
         // Push to list, and add to content
         allSeaLife.push(this);
@@ -69,13 +79,29 @@ class SeaLife {
         
         let pos = this.image.getBoundingClientRect();
 
-        if(pos.left > (window.innerWidth - this.image.width - 5)) {
+        let rBound = window.innerWidth - this.image.width - 10;
+        let lBound = 10;
 
-            this.image.style.left = "0px";
-            pos = this.image.getBoundingClientRect();
+        if(this.facingRight) {
+
+            if(pos.left > rBound) {
+
+                this.image.style.left = lBound + "px";
+                pos = this.image.getBoundingClientRect();
+            }
+
+            this.image.style.left = pos.left + this.speed + "px";
         }
+        else {
 
-        this.image.style.left = pos.left + this.speed + "px";
+            if(pos.left < lBound) {
+
+                this.image.style.left = rBound + "px";
+                pos = this.image.getBoundingClientRect();
+            }
+
+            this.image.style.left = pos.left + this.speed + "px";
+        }
     }
 }
 
