@@ -17,6 +17,9 @@ const lBottomBtnContainer = document.createElement("div");
 const rBottomBtnContainer = document.createElement("div");
 const numpad = document.createElement("div");
 
+const rBound = window.innerWidth + 200;
+const lBound = -200;
+
 let swimCycle;
 let seaLifeCycle;
 
@@ -48,26 +51,25 @@ let allSeaLife = [];
 
 class SeaLife {
 
-    constructor(image, startY) {
+    constructor(image, y) {
 
         this.image = document.createElement("img");
         this.image.classList.add("moving-object");
         this.image.src = image;
 
-        this.image.style.top = startY + "px";
+        this.yPos = y;
+        this.image.style.top = this.yPos;
 
-        this.speed = 0.25 + (Math.random() * 0.5);
+        this.speed = 5.25 + (Math.random() * 0.5);
 
         this.facingRight = (Math.floor(Math.random() * 2) == 0);
 
         this.image.style.left = "0px";
 
-        if(this.facingRight) {
-
-        }
-        else {
+        if(!this.facingRight) {
 
             this.speed *= -1;
+            this.image.style.left = window.innerWidth - this.image.width - 10;
         }
 
         // Push to list, and add to content
@@ -77,10 +79,9 @@ class SeaLife {
 
     swim() {
         
-        let pos = this.image.getBoundingClientRect();
+        //this.image.style.top = this.yPos;
 
-        let rBound = window.innerWidth - this.image.width - 10;
-        let lBound = 10;
+        let pos = this.image.getBoundingClientRect();
 
         if(this.facingRight) {
 
@@ -578,11 +579,14 @@ function spawnSeaLife(img, num) {
 
     // Begin swim interval, if no life exists yet
     if(swimCycle == null) {
-        
+
         swimCycle = setInterval(moveSeaLife, 10);
     }
 
-    let newLife = new SeaLife(img, num * 100);
+    let y = Math.floor(10 + (Math.random() * 80));
+    y = y.toString() + "%";
+
+    let newLife = new SeaLife(img, y);
 }
 
 function moveSeaLife() {
