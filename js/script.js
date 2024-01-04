@@ -6,6 +6,7 @@ let equation = {
     operator: null
 };
 
+const contentContainer = document.querySelector("#content");
 const calcContainer = document.querySelector("#calc-container");
 const aquaImage = document.querySelector(".fading-image");
 const calculator = document.createElement("div");
@@ -16,6 +17,7 @@ const lBottomBtnContainer = document.createElement("div");
 const rBottomBtnContainer = document.createElement("div");
 const numpad = document.createElement("div");
 
+let swimCycle;
 let seaLifeCycle;
 
 const seaLifeImages = ["./images/todd-cravens-whale.jpg",
@@ -41,7 +43,32 @@ const seaLifeSounds = ["./sounds/whale.mp3",
                         "./sounds/duck.mp3"];
 
 const impactSound = "./sounds/impact-boom.mp3";
-                        
+
+let allSeaLife = [];
+
+class SeaLife {
+
+    constructor(image, startY) {
+
+        this.image = document.createElement("img");
+        this.image.classList.add("moving-object");
+        this.image.src = image;
+
+        this.facingRight = (Math.floor(Math.random() * 2) == 0);
+        this.image.style.left = (this.facingRight ? "0px" : "200px");
+        this.image.style.top = startY + "px";
+
+        // Push to list, and add to content
+        allSeaLife.push(this);
+        contentContainer.appendChild(this.image);
+    }
+
+    swim() {
+        
+        //this.image.style.width = (Math.random() * 100) + "px";
+    }
+}
+
 
 createCalculator();
 
@@ -84,6 +111,9 @@ function createCalculator() {
             backspace();
         }
     });
+
+    // Begin cycle to move sea life
+    swimCycle = setInterval(moveSeaLife, 10);
 }
 
 function organizeCalculator() {
@@ -480,7 +510,27 @@ function createSeaLife(num) {
 
             aquaImage.style.opacity -= 0.01;
         }
+        else { // End cycle once cleared
+
+            clearInterval(seaLifeCycle);
+        }
     }, 10);
 
     aquaImage.style.opacity = 0;
+
+    // Spawn swimming sea life
+    spawnSeaLife(seaLifeImages[num], num)
+}
+
+function spawnSeaLife(img, num) {
+
+    let newLife = new SeaLife(img, num * 100);
+}
+
+function moveSeaLife() {
+
+    for(let i = 0; i < allSeaLife.length; i++) {
+
+        allSeaLife[i].swim();
+    }
 }

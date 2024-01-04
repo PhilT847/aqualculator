@@ -86,6 +86,13 @@ body {
     opacity: 0;
 }
 
+.moving-object {
+    position: absolute;
+    z-index: 0;
+    width: 50px;
+    height: 50px;
+}
+
 .button {
     line-height: 84px; /* Align in center */
     vertical-align: middle;
