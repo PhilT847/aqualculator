@@ -52,11 +52,11 @@ const seaLifeSounds = ["./sounds/whale.mp3",
                         "./sounds/pirate.mp3",
                         "./sounds/bubbles.mp3",
                         "./sounds/dolphin.mp3",
-                        "./sounds/duck.mp3",
+                        "./sounds/camera.mp3",
                         "./sounds/duck.mp3",
                         "./sounds/clown.mp3",
-                        "./sounds/duck.mp3",
-                        "./sounds/duck.mp3"];
+                        "./sounds/hiss.mp3",
+                        "./sounds/snipping.mp3"];
 
 const impactSound = "./sounds/impact-boom.mp3";
 
@@ -87,7 +87,7 @@ class SeaLife {
         if(!this.facingRight) {
 
             this.speed *= -1;
-            this.image.style.left = window.innerWidth - this.image.width - 10;
+            this.image.style.left = rBound + "px";
         }
 
         // Push to list, and add to content
@@ -613,7 +613,7 @@ function spawnSeaLife(img, num) {
         swimCycle = setInterval(moveSeaLife, 10);
     }
 
-    let y = Math.floor(10 + (Math.random() * 80));
+    let y = Math.floor(5 + (Math.random() * 80));
     y = y.toString() + "vh";
 
     // Spawn new sea life up to maximum pop
