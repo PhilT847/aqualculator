@@ -480,8 +480,10 @@ function setOperator(op) {
 
     playClick();
 
-    // If no operand, return
-    if(equation.operand1 == null) {
+    // If no operand1, or already
+    // an operator, return
+    if(equation.operand1 == null
+        || equation.operator != null) {
 
         return;
     }
@@ -497,6 +499,11 @@ function setOperator(op) {
     equation.operator = op;
 
     updateView();
+}
+
+function readyForSolve() {
+
+    return(equation.operand1 != null)
 }
 
 function solve() {
@@ -685,9 +692,11 @@ function createSeaLife(num) {
     
     // Play sound
     let audio = new Audio(seaLifeSounds[num]);
+    audio.volume = 0.5; // Reduce sea life volume
     audio.play();
 
     let impactAudio = new Audio(impactSound);
+    impactAudio.volume = 0.1; // Reduce boom volume
     impactAudio.play();
 
     // Clear image-fading interval and reset
