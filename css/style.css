@@ -37,6 +37,7 @@ body {
 #calc-container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 12px;
     height: 550px;
     width: 400px;
@@ -122,7 +123,6 @@ body {
     z-index: -1;
     height: 700px;
     width: 500px;
-    top: 20%;
     align-self: center;
     /*box-shadow: 5px 12px 12px rgba(0,0,100,0.5);*/
 }
