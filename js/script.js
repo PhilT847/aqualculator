@@ -415,6 +415,8 @@ function createRightButtons() {
 }
 
 function addNumber(num) {
+    
+    playClick();
 
     // With no operator present, add to operand1
     // Otherwise, add to operand2
@@ -446,6 +448,8 @@ function addNumber(num) {
 
 function addDecimalPlace() {
 
+    playClick();
+
     if(equation.operator == null) {
 
         if(equation.operand1 == null) {
@@ -474,6 +478,8 @@ function addDecimalPlace() {
 
 function setOperator(op) {
 
+    playClick();
+
     // If no operand, return
     if(equation.operand1 == null) {
 
@@ -495,6 +501,8 @@ function setOperator(op) {
 
 function solve() {
 
+    playClick();
+    
     // Divide by 0; kill fish
     if(equation.operand2 == "0" &&
         equation.operator == "/") {
@@ -591,6 +599,8 @@ function killFish() {
 
 function backspace() {
 
+    playClick();
+
     if(equation.operand2 != null) {
 
         if(equation.operand2.length < 2) {
@@ -628,6 +638,12 @@ function resetEquation() {
     equation.operator = null;
 
     updateView();
+}
+
+function playClick() {
+
+    let audio = new Audio("./sounds/click.mp3");
+    audio.play();
 }
 
 function updateView() {
