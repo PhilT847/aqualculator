@@ -25,6 +25,12 @@ const maxPop = 20;
 let swimCycle;
 let fadeCycle;
 
+const calcImages = ["./images/calc/calculator.png",
+                    "./images/calc/button1.png",
+                    "./images/calc/button2.png",
+                    "./images/calc/button3.png",
+                    "./images/calc/button4.png"];
+
 const seaLifeImages = ["./images/todd-cravens-whale.jpg",
                         "./images/tim-de-pauw-hippo.jpg",
                         "./images/john-doe-pirate.jpg",
@@ -129,6 +135,7 @@ createCalculator();
 
 function createCalculator() {
 
+    createCalcBackground();
     organizeCalculator();
     createNumpad();
     createTopButtons();
@@ -177,6 +184,15 @@ function loadImages() {
     }
 }
 
+function createCalcBackground() {
+
+    const img = document.createElement("img");
+    img.classList.add("calc-image");
+    img.src = calcImages[0];
+
+    calcContainer.appendChild(img);
+}
+
 function organizeCalculator() {
 
     calcContainer.appendChild(view);
@@ -202,9 +218,24 @@ function createNumpad() {
         const num = document.createElement("div");
         num.classList.add("button");
 
+        const img = document.createElement("img");
+        img.classList.add("button-image");
+
+        const txt = document.createElement("div");
+        txt.classList.add("button-text");
+
+        if(i != 0) {
+
+            img.src = calcImages[1];
+        }
+        else {
+
+            img.src = calcImages[4];
+        }
+
         if(i > -1) {
 
-            num.textContent = i;
+            txt.textContent = i;
 
             num.addEventListener("click", () => {
     
@@ -217,7 +248,7 @@ function createNumpad() {
         }
         else { // At -1, add decimal
 
-            num.textContent = ".";
+            txt.textContent = ".";
 
             num.addEventListener("click", () => {
     
@@ -225,26 +256,33 @@ function createNumpad() {
             });
         }
 
+
+        num.appendChild(img);
+        num.appendChild(txt);
+
         numpad.appendChild(num);
     }
 }
 
 function createTopButtons() {
 
+    // Create array for easier image addition later
+    let allButtons = [];
+
     const backButton = document.createElement("div");
     const clearButton = document.createElement("div");
     const moduloButton = document.createElement("div");
     const divideButton = document.createElement("div");
 
+    allButtons.push(backButton);
+    allButtons.push(clearButton);
+    allButtons.push(moduloButton);
+    allButtons.push(divideButton);
+
     backButton.classList.add("button");
     clearButton.classList.add("button");
     moduloButton.classList.add("button");
     divideButton.classList.add("button");
-
-    backButton.textContent = "<-";
-    clearButton.textContent = "AC";
-    moduloButton.textContent = "%";
-    divideButton.textContent = "/";
 
     backButton.addEventListener("click", () => {
 
@@ -266,6 +304,35 @@ function createTopButtons() {
         setOperator("/");
     });
 
+    // Add image/text
+    for(let i = 0; i < allButtons.length; i++) {
+
+        const img = document.createElement("img");
+        img.classList.add("button-image");
+        img.src = calcImages[2];
+
+        const txt = document.createElement("div");
+        txt.classList.add("button-text");
+
+        switch(i) {
+            case 0:
+                txt.textContent = "<-";
+                break;
+            case 1:
+                txt.textContent = "AC";
+                break;
+            case 2:
+                txt.textContent = "%";
+                break;
+            case 3:
+                txt.textContent = "/";
+                break;
+        }
+
+        allButtons[i].appendChild(img);
+        allButtons[i].appendChild(txt);
+    }
+
     topBtnContainer.appendChild(backButton);  
     topBtnContainer.appendChild(clearButton);  
     topBtnContainer.appendChild(moduloButton);  
@@ -273,6 +340,8 @@ function createTopButtons() {
 }
 
 function createRightButtons() {
+
+    let allButtons = [];
 
     const multiplyButton = document.createElement("div");
     const subtractButton = document.createElement("div");
@@ -284,10 +353,10 @@ function createRightButtons() {
     addButton.classList.add("button");
     equalsButton.classList.add("button");
 
-    multiplyButton.textContent = "*";
-    subtractButton.textContent = "-";
-    addButton.textContent = "+";
-    equalsButton.textContent = "=";
+    allButtons.push(multiplyButton);
+    allButtons.push(subtractButton);
+    allButtons.push(addButton);
+    allButtons.push(equalsButton);
 
     multiplyButton.addEventListener("click", () => {
 
@@ -308,6 +377,36 @@ function createRightButtons() {
 
         solve();
     });
+
+    // Add image/text
+    for(let i = 0; i < allButtons.length; i++) {
+
+        const img = document.createElement("img");
+        img.classList.add("button-image");
+        img.src = calcImages[2];
+
+        const txt = document.createElement("div");
+        txt.classList.add("button-text");
+
+        switch(i) {
+            case 0:
+                txt.textContent = "*";
+                break;
+            case 1:
+                txt.textContent = "-";
+                break;
+            case 2:
+                txt.textContent = "+";
+                break;
+            case 3:
+                img.src = calcImages[3];
+                txt.textContent = "=";
+                break;
+        }
+
+        allButtons[i].appendChild(img);
+        allButtons[i].appendChild(txt);
+    }
 
     rBottomBtnContainer.appendChild(multiplyButton);
     rBottomBtnContainer.appendChild(subtractButton);
