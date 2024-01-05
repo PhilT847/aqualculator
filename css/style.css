@@ -122,8 +122,9 @@ body {
     z-index: -1;
     height: 700px;
     width: 500px;
+    top: 20%;
     align-self: center;
-    box-shadow: 18px 18px 12px rgba(0,0,100,0.5);
+    /*box-shadow: 5px 12px 12px rgba(0,0,100,0.5);*/
 }
 
 .button-image {
